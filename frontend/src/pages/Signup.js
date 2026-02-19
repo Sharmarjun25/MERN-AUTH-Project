@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import { useState } from 'react';
-import { handleError } from '../utils';
+import { handleError, handleSuccess } from '../utils';
 import { useNavigate } from 'react-router-dom';
 
 function Signup() {
@@ -49,12 +49,17 @@ function Signup() {
                 body: JSON.stringify(signupInfo)
             });
             const result = await response.json();
-            const { success, message } = result;
+            const { success, message, error } = result;
             if (success) {
                 handleSuccess(message);
                 setTimeout(() => {
                     navigate('/login')
                 }, 1000)
+            } else if (error) {
+                const details = error?.details[0].message;
+                handleError(details);
+            } else if (!success) {
+                handleError(message);
             }
 
             console.log(result);
