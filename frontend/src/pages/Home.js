@@ -8,6 +8,7 @@ import { ToastContainer } from 'react-toastify';
 function Home() {
 
     const [loggedInUser, setLoggedInUser] = useState('');
+    const [products, setProducts] = useState([]);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -29,9 +30,10 @@ function Home() {
             const headers = {
                 'Authorization': localStorage.getItem('token')
             }
-            const response = await fetch(url);
+            const response = await fetch(url, { headers });
             const result = await response.json();
             console.log(result);
+            setProducts(result);
         } catch (err) {
             handleError(err);
         }
@@ -45,8 +47,23 @@ function Home() {
 
     return (
         <div>
-            <h1>{loggedInUser}</h1>
-            <button onClick={handleLogout}>Logout</button>
+            <center><h1> HELLO THERE ! I AM {loggedInUser}</h1> </center>
+            <button onClick={handleLogout}> Want to log  in again ? Logout</button>
+
+            <div>
+                <h2>Products</h2>
+                {products.length > 0 ? (
+                    <ul>
+                        {products.map((item, index) => (
+                            <li key={index}>
+                                <span>{item.name}</span> - <span>₹{item.price}</span>
+                            </li>
+                        ))}
+                    </ul>
+                ) : (
+                    <p>No products available</p>
+                )}
+            </div>
 
             <ToastContainer />
 

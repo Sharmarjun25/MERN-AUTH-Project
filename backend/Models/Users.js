@@ -15,8 +15,16 @@ const UserSchema = new Schema({
     password: {
         type: String,
         required: true,
+    },
+    otp: {
+        type: String,
+        default: null
+    },
+    otpExpiry: {
+        type: Date,
+        default: null
     }
 });
 
-const UserModel = mongoose.model('users' , UserSchema);
+const UserModel = mongoose.model('users', UserSchema);
 module.exports = UserModel;
