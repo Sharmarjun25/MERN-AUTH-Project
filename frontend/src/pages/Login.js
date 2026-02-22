@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import { useState } from 'react';
-import { handleError, handleSuccess } from '../utils';
+import { handleError, handleSuccess, API_URL } from '../utils';
 import { useNavigate } from 'react-router-dom';
 
 function Login() {
@@ -36,7 +36,7 @@ function Login() {
         }
         try {
 
-            const url = "http://localhost:8080/auth/login";
+            const url = `${API_URL}/auth/login`;
             const response = await fetch(url, {
                 method: "POST",
                 headers: {

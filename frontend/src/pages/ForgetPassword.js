@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
-import { handleError, handleSuccess } from '../utils';
+import { handleError, handleSuccess, API_URL } from '../utils';
 
 function ForgotPassword() {
     const [step, setStep] = useState(1);
@@ -19,7 +19,7 @@ function ForgotPassword() {
             return;
         }
         try {
-            const response = await fetch('http://localhost:8080/auth/forgot-password', {
+            const response = await fetch(`${API_URL}/auth/forgot-password`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -45,7 +45,7 @@ function ForgotPassword() {
             return handleError('Otp is required');
         }
         try {
-            const response = await fetch('http://localhost:8080/auth/verify-otp', {
+            const response = await fetch(`${API_URL}/auth/verify-otp`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ email, otp })
@@ -75,7 +75,7 @@ function ForgotPassword() {
             return handleError('Passwords do not match');
         }
         try {
-            const response = await fetch('http://localhost:8080/auth/reset-password', {
+            const response = await fetch(`${API_URL}/auth/reset-password`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ email, otp, newPassword })

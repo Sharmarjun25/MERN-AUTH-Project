@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { handleError, handleSuccess } from '../utils';
+import { handleError, handleSuccess, API_URL } from '../utils';
 import { useNavigate } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 
@@ -30,7 +30,7 @@ function Home() {
 
     const fetchProducts = async () => {
         try {
-            const url = "http://localhost:8080/products";
+            const url = `${API_URL}/products`;
             const headers = {
                 'Authorization': localStorage.getItem('token')
             };
