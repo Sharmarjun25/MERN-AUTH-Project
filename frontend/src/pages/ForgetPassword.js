@@ -145,7 +145,7 @@ function ForgotPassword() {
                             <button type='submit'>Verify OTP</button>
                             <span>
                                 Didn't receive ?
-                                <a href='#' onClick={(e) => { e.preventDefault(); setStep(1); }}>Resent OTP</a>
+                                <span style={{ color: '#667eea', cursor: 'pointer', fontWeight: 600, marginLeft: 5 }} onClick={() => setStep(1)}>Resend OTP</span>
                             </span>
                         </form>
 
